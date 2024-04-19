@@ -40,5 +40,12 @@ public class AuthenticationService {
         // send email
     }
 
+    private String generateAndSaveActivationToken(User user) {
+        String generatedToken = generateActivationCode(6);
+        return null;
+    }
+
+
+
 
 }
