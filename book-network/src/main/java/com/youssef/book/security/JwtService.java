@@ -43,12 +43,9 @@ public class JwtService {
 
     public boolean isTokenValid(String token, UserDetails userDetails){
         final String username = extractUsername(token);
+        return (username.equals(userDetails.getUsername())) && !isTokenExpired(token);
     }
 
-    private Key getSignInKey() {
-        byte[] keyBytes = Decoders.BASE64.decode(secretKey);
-        return Keys.hmacShaKeyFor(keyBytes);
-    }
 
     public String extractUsername(String token) {
         return extractClaim(token, Claims::getSubject);
@@ -67,5 +64,11 @@ public class JwtService {
                 .parseClaimsJws(token)
                 .getBody()
                 ;
+    }
+
+
+    private Key getSignInKey() {
+        byte[] keyBytes = Decoders.BASE64.decode(secretKey);
+        return Keys.hmacShaKeyFor(keyBytes);
     }
 }
