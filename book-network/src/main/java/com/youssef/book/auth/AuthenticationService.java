@@ -1,6 +1,8 @@
 package com.youssef.book.auth;
 
 import com.youssef.book.role.RoleRepository;
+import com.youssef.book.user.Token;
+import com.youssef.book.user.TokenRepository;
 import com.youssef.book.user.User;
 import com.youssef.book.user.UserRepository;
 import lombok.RequiredArgsConstructor;
@@ -8,6 +10,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.security.SecureRandom;
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Service
@@ -17,6 +20,7 @@ public class AuthenticationService {
     private final RoleRepository roleRepository;
     private final PasswordEncoder passwordEncoder;
     private final UserRepository userRepository;
+    private final TokenRepository tokenRepository;
     public void register(RegistrationRequest request) {
         var userRole = roleRepository.findByName("USER")
                 // todo - better exception handling
@@ -43,7 +47,14 @@ public class AuthenticationService {
 
     private String generateAndSaveActivationToken(User user) {
         String generatedToken = generateActivationCode(6);
-        return null;
+        var token = Token.builder()
+                .token(generatedToken)
+                .createdAt(LocalDateTime.now())
+                .expiredAt(LocalDateTime.now().plusMinutes(15))
+                .user(user)
+                .build();
+        tokenRepository.save(token);
+        return generatedToken;
     }
 
     private String generateActivationCode(int length) {
