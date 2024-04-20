@@ -1,5 +1,6 @@
 package com.youssef.book.auth;
 
+import com.youssef.book.email.EmailService;
 import com.youssef.book.role.RoleRepository;
 import com.youssef.book.user.Token;
 import com.youssef.book.user.TokenRepository;
@@ -21,6 +22,7 @@ public class AuthenticationService {
     private final PasswordEncoder passwordEncoder;
     private final UserRepository userRepository;
     private final TokenRepository tokenRepository;
+    private final EmailService emailService;
     public void register(RegistrationRequest request) {
         var userRole = roleRepository.findByName("USER")
                 // todo - better exception handling
