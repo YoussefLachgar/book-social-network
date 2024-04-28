@@ -85,4 +85,6 @@ public class AuthenticationService {
     }
 
 
+    public Object authenticate(AuthenticationRequest request) {
+    }
 }
