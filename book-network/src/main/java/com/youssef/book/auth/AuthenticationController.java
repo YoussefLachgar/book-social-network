@@ -33,7 +33,7 @@ public class AuthenticationController {
     @GetMapping("/activate-account")
     public void confirm(
             @RequestParam String token
-    ){
+    ) throws MessagingException {
         authenticationService.activateAccount(token);
     }
 
