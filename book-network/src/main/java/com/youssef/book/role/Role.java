@@ -3,10 +3,7 @@ package com.youssef.book.role;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.youssef.book.user.User;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
@@ -19,6 +16,7 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
+@Builder
 @EntityListeners(AuditingEntityListener.class)
 public class Role {
     @Id @GeneratedValue
