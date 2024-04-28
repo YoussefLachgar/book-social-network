@@ -30,5 +30,12 @@ public class AuthenticationController {
         return ResponseEntity.ok(authenticationService.authenticate(request));
     }
 
+    @GetMapping("/activate-account")
+    public void confirm(
+            @RequestParam String token
+    ){
+        authenticationService.activateAccount(token);
+    }
+
 
 }
