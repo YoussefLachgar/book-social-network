@@ -103,6 +103,7 @@ public class AuthenticationService {
         );
         var claims = new HashMap<String, Object>();
         var user = ((User)auth.getPrincipal());
+//        System.out.println("the principal is :" + user);
         claims.put("fullname", user.fullName());
         var jwtToken = jwtService.generateToken(claims, user);
 
